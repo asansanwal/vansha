@@ -1,0 +1,102 @@
+---
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <h3>Vansha</h3>
+      <p>Discover your roots. Preserve your heritage. Connect with your family across generations.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/tree">Family Tree</a></li>
+          <li><a href="/search">Search Records</a></li>
+          <li><a href="/add">Add a Person</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Getting Started</a></li>
+          <li><a href="#">Research Tips</a></li>
+          <li><a href="#">Help Center</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; {new Date().getFullYear()} Vansha. Built with Astro & React.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-bg-dark);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 3rem 0 1.5rem;
+    margin-top: auto;
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .footer-brand {
+    flex: 1 1 300px;
+  }
+
+  .footer-brand h3 {
+    font-size: 1.5rem;
+    color: var(--color-accent-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-brand p {
+    max-width: 300px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 3rem;
+    flex: 1 1 300px;
+  }
+
+  .footer-col h4 {
+    color: #fff;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .footer-col ul {
+    list-style: none;
+  }
+
+  .footer-col li {
+    margin-bottom: 0.4rem;
+  }
+
+  .footer-col a {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+  }
+
+  .footer-col a:hover {
+    color: var(--color-accent-light);
+  }
+
+  .footer-bottom {
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 2rem;
+    padding-top: 1rem;
+    text-align: center;
+    font-size: 0.85rem;
+    opacity: 0.5;
+  }
+</style>

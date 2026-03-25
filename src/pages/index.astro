@@ -1,0 +1,251 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Vansha — Discover Your Family Heritage">
+  <Navbar slot="header" />
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay">
+      <div class="container hero-content">
+        <h1>Discover Your<br />Family Story</h1>
+        <p>Build your family tree, explore your ancestry, and preserve the memories that connect generations.</p>
+        <div class="hero-actions">
+          <a href="/tree" class="btn btn-accent">View Family Tree</a>
+          <a href="/add" class="btn btn-secondary btn-hero-secondary">Add Someone</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">Explore Your Heritage</h2>
+      <p class="section-subtitle">Vansha helps you build, manage, and explore your family tree with powerful tools and a beautiful interface.</p>
+      <div class="features-grid">
+        <div class="feature card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Build Your Tree</h3>
+          <p>Add family members and connect relationships — parents, children, and spouses — to create a rich family tree.</p>
+        </div>
+        <div class="feature card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3>Search & Discover</h3>
+          <p>Find family members by name, location, or life events. Uncover hidden connections across your family history.</p>
+        </div>
+        <div class="feature card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <h3>Record Life Events</h3>
+          <p>Document births, marriages, milestones, and more. Preserve the stories that make your family unique.</p>
+        </div>
+        <div class="feature card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <h3>Visual Tree View</h3>
+          <p>See your family history come to life with an interactive, visual family tree you can explore and navigate.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat">
+        <span class="stat-number">&infin;</span>
+        <span class="stat-label">Generations to Explore</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Private & Secure</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">Free</span>
+        <span class="stat-label">Forever</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container cta-content">
+      <h2>Start Building Your Family Tree Today</h2>
+      <p>Every family has a story worth telling. Begin yours now.</p>
+      <a href="/add" class="btn btn-accent">Get Started</a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 50%, #40916c 100%);
+    min-height: 70vh;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .hero-overlay {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content {
+    max-width: 650px;
+    padding: 4rem 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 3.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  .hero p {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 2rem;
+    max-width: 500px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-hero-secondary {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .btn-hero-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #fff;
+    color: #fff;
+  }
+
+  /* Features */
+  .features {
+    padding: 5rem 0;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto 3rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .feature {
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .feature-icon {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .feature h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .feature p {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+  }
+
+  /* Stats */
+  .stats {
+    background: var(--color-primary);
+    padding: 3rem 0;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-accent-light);
+    font-family: var(--font-heading);
+  }
+
+  .stat-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+  }
+
+  /* CTA */
+  .cta {
+    padding: 5rem 0;
+    text-align: center;
+  }
+
+  .cta-content h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .cta-content p {
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

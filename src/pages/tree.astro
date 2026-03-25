@@ -1,0 +1,440 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
+---
+
+<BaseLayout title="Family Tree — Vansha">
+  <Navbar slot="header" />
+
+  <section class="tree-page">
+    <div class="tree-header">
+      <div class="container">
+        <h1>Family Tree</h1>
+        <p>Click any person to see details. Drag to pan, scroll to zoom.</p>
+      </div>
+    </div>
+    <FamilyTreeViewer client:load />
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .tree-page {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 60px);
+  }
+
+  .tree-header {
+    background: var(--color-primary-dark);
+    color: #fff;
+    padding: 1.5rem 0;
+  }
+
+  .tree-header h1 {
+    color: #fff;
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .tree-header p {
+    opacity: 0.7;
+    font-size: 0.9rem;
+  }
+</style>
+
+<style is:global>
+  /* Tree viewer styles */
+  .tree-viewer {
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    background: #f0f4f0;
+    background-image:
+      radial-gradient(circle, #d4d4d4 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .tree-canvas {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+    min-height: 500px;
+  }
+
+  .tree-transform {
+    transition: transform 0.05s ease-out;
+  }
+
+  .tree-controls {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: #fff;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: 0.25rem;
+  }
+
+  .tree-controls button {
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    font-size: 1.25rem;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+  }
+
+  .tree-controls button:hover {
+    background: var(--color-bg);
+  }
+
+  .zoom-level {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    min-width: 3rem;
+    text-align: center;
+  }
+
+  .reset-btn {
+    border-left: 1px solid var(--color-border) !important;
+    margin-left: 0.25rem;
+    padding-left: 0.25rem;
+  }
+
+  /* Tree Branch Structure */
+  .tree-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tree-couple {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .spouse-connector {
+    width: 24px;
+    height: 2px;
+    background: var(--color-accent);
+    position: relative;
+  }
+
+  .spouse-connector::after {
+    content: '♥';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.6rem;
+    color: var(--color-accent);
+    background: #f0f4f0;
+    padding: 0 2px;
+  }
+
+  .vertical-line {
+    width: 2px;
+    height: 24px;
+    background: var(--color-primary-light);
+  }
+
+  .horizontal-line-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .horizontal-line {
+    height: 2px;
+    background: var(--color-primary-light);
+    min-width: 40px;
+    align-self: center;
+  }
+
+  .tree-children {
+    display: flex;
+    gap: 1.5rem;
+    position: relative;
+  }
+
+  .tree-children > .tree-branch {
+    position: relative;
+  }
+
+  .tree-children > .tree-branch::before {
+    content: '';
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    width: 2px;
+    height: 24px;
+    background: var(--color-primary-light);
+  }
+
+  .tree-children::before {
+    content: '';
+    position: absolute;
+    top: -24px;
+    left: calc(50% - 50% + (100% / var(--child-count, 2) / 2));
+    right: calc(50% - 50% + (100% / var(--child-count, 2) / 2));
+    height: 2px;
+    background: var(--color-primary-light);
+  }
+
+  /* Person Node */
+  .person-node {
+    background: #fff;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.75rem;
+    min-width: 140px;
+    max-width: 180px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+  }
+
+  .person-node:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .person-node.selected {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.2);
+  }
+
+  .person-node.gender-male {
+    border-top: 3px solid #4a90d9;
+  }
+
+  .person-node.gender-female {
+    border-top: 3px solid #d94a8c;
+  }
+
+  .person-node.gender-other {
+    border-top: 3px solid var(--color-accent);
+  }
+
+  .person-node.deceased {
+    opacity: 0.8;
+  }
+
+  .node-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin: 0 auto 0.5rem;
+    overflow: hidden;
+    background: var(--color-primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gender-male .node-avatar {
+    background: #c5d9f0;
+  }
+
+  .gender-female .node-avatar {
+    background: #f0c5d9;
+  }
+
+  .node-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .node-initials {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+  }
+
+  .node-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .node-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-text);
+  }
+
+  .node-surname {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+  }
+
+  .node-dates {
+    font-size: 0.7rem;
+    color: var(--color-text-light);
+    margin-top: 0.25rem;
+  }
+
+  /* Sidebar */
+  .tree-sidebar {
+    width: 320px;
+    background: #fff;
+    border-left: 1px solid var(--color-border);
+    overflow-y: auto;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .sidebar-content {
+    padding: 1.5rem;
+  }
+
+  .sidebar-close {
+    float: right;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-text-light);
+    padding: 0.25rem;
+    line-height: 1;
+  }
+
+  .sidebar-close:hover {
+    color: var(--color-text);
+  }
+
+  .sidebar-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0.5rem auto 1rem;
+    overflow: hidden;
+    background: var(--color-primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidebar-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .avatar-placeholder {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .sidebar-content h3 {
+    text-align: center;
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .maiden-name {
+    text-align: center;
+    color: var(--color-text-light);
+    font-style: italic;
+    font-size: 0.85rem;
+  }
+
+  .sidebar-dates {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    margin: 0.5rem 0;
+  }
+
+  .sidebar-place {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    margin-bottom: 0.75rem;
+  }
+
+  .sidebar-bio {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: var(--color-bg);
+    border-radius: var(--radius-sm);
+  }
+
+  .sidebar-relations {
+    margin-bottom: 1rem;
+  }
+
+  .relation {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.85rem;
+  }
+
+  .relation-label {
+    color: var(--color-text-light);
+    font-weight: 500;
+  }
+
+  .sidebar-btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Empty / Loading */
+  .tree-loading,
+  .tree-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+    min-height: 400px;
+  }
+
+  .tree-empty h2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .tree-empty p {
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .tree-sidebar {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 20;
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+</style>

@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { PersonForm } from '../../components/PersonForm';
+import { getDefaultTree } from '../../lib/store';
+
+export function getStaticPaths() {
+  const tree = getDefaultTree();
+  return Object.keys(tree.persons).map((id) => ({
+    params: { id },
+  }));
+}
+
+const { id } = Astro.params;
+---
+
+<BaseLayout title={`Edit — Vansha`}>
+  <Navbar slot="header" />
+
+  <section class="form-page">
+    <div class="form-page-header">
+      <div class="container">
+        <h1>Edit Profile</h1>
+        <p>Update the details for this family member.</p>
+      </div>
+    </div>
+    <div class="container">
+      <PersonForm editPersonId={id} client:load />
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .form-page {
+    min-height: calc(100vh - 60px);
+  }
+
+  .form-page-header {
+    background: var(--color-primary-dark);
+    color: #fff;
+    padding: 1.5rem 0;
+    margin-bottom: 2rem;
+  }
+
+  .form-page-header h1 {
+    color: #fff;
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .form-page-header p {
+    opacity: 0.7;
+    font-size: 0.9rem;
+  }
+</style>
