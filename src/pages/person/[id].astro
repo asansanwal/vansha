@@ -29,7 +29,8 @@ const { id } = Astro.params;
 
 <style>
   .profile-page {
-    padding: 2rem 0 4rem;
+    padding: 1.5rem 0 3rem;
+    background: var(--color-bg);
   }
 </style>
 
@@ -38,6 +39,9 @@ const { id } = Astro.params;
   .profile-not-found {
     text-align: center;
     padding: 4rem 2rem;
+    background: #fff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
   }
 
   .profile-not-found h2 {
@@ -51,13 +55,14 @@ const { id } = Astro.params;
 
   .profile-header {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: flex-start;
-    margin-bottom: 2rem;
-    padding: 2rem;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
     background: #fff;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
   }
 
   .profile-avatar-large {
@@ -66,6 +71,7 @@ const { id } = Astro.params;
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
+    border: 4px solid var(--color-primary);
   }
 
   .profile-avatar-large img {
@@ -83,83 +89,89 @@ const { id } = Astro.params;
     font-size: 2.5rem;
     font-weight: 700;
     color: #fff;
-    background: var(--color-primary-light);
+    background: var(--color-primary);
   }
 
   .avatar-large-placeholder.gender-male {
-    background: #4a90d9;
+    background: #1877F2;
   }
 
   .avatar-large-placeholder.gender-female {
-    background: #d94a8c;
+    background: #F3425F;
   }
 
   .profile-header-info h1 {
-    font-size: 2rem;
-    margin-bottom: 0.25rem;
+    font-size: 1.75rem;
+    margin-bottom: 0.2rem;
+    color: var(--color-text);
   }
 
   .profile-maiden {
     color: var(--color-text-light);
     font-style: italic;
     margin-bottom: 0.5rem;
+    font-size: 0.9375rem;
   }
 
   .profile-dates-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-bottom: 0.75rem;
+    gap: 1.25rem;
+    margin-bottom: 0.65rem;
   }
 
   .profile-date {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     color: var(--color-text-light);
   }
 
   .profile-bio {
-    font-size: 1rem;
+    font-size: 0.9375rem;
     line-height: 1.6;
     color: var(--color-text);
-    max-width: 600px;
+    max-width: 560px;
   }
 
   .profile-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
   }
 
   .profile-section {
-    padding: 1.5rem;
+    padding: 1.25rem;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
   }
 
   .profile-section h2 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--color-primary-light);
+    font-size: 1.1rem;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--color-primary);
+    color: var(--color-text);
   }
 
   .profile-empty {
     color: var(--color-text-light);
     font-style: italic;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
   }
 
   /* Family Members */
   .family-connections {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.35rem;
   }
 
   .family-member {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem;
+    gap: 0.65rem;
+    padding: 0.6rem;
     border-radius: var(--radius-sm);
     text-decoration: none;
     transition: background 0.2s;
@@ -167,6 +179,7 @@ const { id } = Astro.params;
 
   .family-member:hover {
     background: var(--color-bg);
+    text-decoration: none;
   }
 
   .fm-avatar {
@@ -179,16 +192,16 @@ const { id } = Astro.params;
     font-weight: 700;
     font-size: 0.8rem;
     color: #fff;
-    background: var(--color-primary-light);
+    background: var(--color-primary);
     flex-shrink: 0;
   }
 
   .fm-avatar.gender-male {
-    background: #4a90d9;
+    background: #1877F2;
   }
 
   .fm-avatar.gender-female {
-    background: #d94a8c;
+    background: #F3425F;
   }
 
   .fm-info {
@@ -197,16 +210,17 @@ const { id } = Astro.params;
   }
 
   .fm-label {
-    font-size: 0.7rem;
+    font-size: 0.6875rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--color-text-light);
+    font-weight: 600;
   }
 
   .fm-name {
     font-weight: 600;
     color: var(--color-text);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
   }
 
   .fm-dates {
@@ -227,12 +241,12 @@ const { id } = Astro.params;
     top: 0;
     bottom: 0;
     width: 2px;
-    background: var(--color-primary-light);
+    background: var(--color-primary);
   }
 
   .timeline-item {
     position: relative;
-    padding-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
     display: flex;
     gap: 0.75rem;
   }
@@ -248,34 +262,34 @@ const { id } = Astro.params;
     justify-content: center;
     font-size: 0.8rem;
     background: #fff;
-    border: 2px solid var(--color-primary-light);
+    border: 2px solid var(--color-primary);
     border-radius: 50%;
     z-index: 1;
   }
 
   .timeline-content h4 {
-    font-size: 0.95rem;
+    font-size: 0.9375rem;
     color: var(--color-text);
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.15rem;
   }
 
   .timeline-date,
   .timeline-place {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--color-text-light);
     display: block;
   }
 
   .timeline-content p {
-    font-size: 0.85rem;
+    font-size: 0.8125rem;
     color: var(--color-text);
-    margin-top: 0.25rem;
+    margin-top: 0.2rem;
   }
 
   /* Profile Actions */
   .profile-actions {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     justify-content: center;
   }
 

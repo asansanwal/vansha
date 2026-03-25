@@ -25,24 +25,26 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
   .tree-page {
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 56px);
   }
 
   .tree-header {
-    background: var(--color-primary-dark);
-    color: #fff;
-    padding: 1.5rem 0;
+    background: #ffffff;
+    color: var(--color-text);
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
   }
 
   .tree-header h1 {
-    color: #fff;
-    font-size: 1.75rem;
-    margin-bottom: 0.25rem;
+    color: var(--color-text);
+    font-size: 1.5rem;
+    margin-bottom: 0.15rem;
   }
 
   .tree-header p {
-    opacity: 0.7;
-    font-size: 0.9rem;
+    color: var(--color-text-light);
+    font-size: 0.875rem;
   }
 </style>
 
@@ -53,9 +55,9 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
     display: flex;
     position: relative;
     overflow: hidden;
-    background: #f0f4f0;
+    background: var(--color-bg);
     background-image:
-      radial-gradient(circle, #d4d4d4 1px, transparent 1px);
+      radial-gradient(circle, #D8DADF 1px, transparent 1px);
     background-size: 24px 24px;
   }
 
@@ -84,11 +86,12 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-md);
     padding: 0.25rem;
+    border: 1px solid var(--color-border);
   }
 
   .tree-controls button {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     border: none;
     background: transparent;
     font-size: 1.25rem;
@@ -132,7 +135,7 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
   .spouse-connector {
     width: 24px;
     height: 2px;
-    background: var(--color-accent);
+    background: var(--color-primary-light);
     position: relative;
   }
 
@@ -143,15 +146,15 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 0.6rem;
-    color: var(--color-accent);
-    background: #f0f4f0;
+    color: var(--color-primary);
+    background: var(--color-bg);
     padding: 0 2px;
   }
 
   .vertical-line {
     width: 2px;
     height: 24px;
-    background: var(--color-primary-light);
+    background: var(--color-border);
   }
 
   .horizontal-line-container {
@@ -163,7 +166,7 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
 
   .horizontal-line {
     height: 2px;
-    background: var(--color-primary-light);
+    background: var(--color-border);
     min-width: 40px;
     align-self: center;
   }
@@ -185,7 +188,7 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
     left: 50%;
     width: 2px;
     height: 24px;
-    background: var(--color-primary-light);
+    background: var(--color-border);
   }
 
   .tree-children::before {
@@ -195,13 +198,13 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
     left: calc(50% - 50% + (100% / var(--child-count, 2) / 2));
     right: calc(50% - 50% + (100% / var(--child-count, 2) / 2));
     height: 2px;
-    background: var(--color-primary-light);
+    background: var(--color-border);
   }
 
   /* Person Node */
   .person-node {
     background: #fff;
-    border: 2px solid var(--color-border);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: 0.75rem;
     min-width: 140px;
@@ -210,32 +213,33 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
     cursor: pointer;
     transition: all 0.2s ease;
     user-select: none;
+    box-shadow: var(--shadow-sm);
   }
 
   .person-node:hover {
-    transform: translateY(-2px);
     box-shadow: var(--shadow-md);
+    border-color: var(--color-primary-light);
   }
 
   .person-node.selected {
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.2);
+    box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.25);
   }
 
   .person-node.gender-male {
-    border-top: 3px solid #4a90d9;
+    border-top: 3px solid #1877F2;
   }
 
   .person-node.gender-female {
-    border-top: 3px solid #d94a8c;
+    border-top: 3px solid #F3425F;
   }
 
   .person-node.gender-other {
-    border-top: 3px solid var(--color-accent);
+    border-top: 3px solid var(--color-text-light);
   }
 
   .person-node.deceased {
-    opacity: 0.8;
+    opacity: 0.75;
   }
 
   .node-avatar {
@@ -244,18 +248,18 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
     border-radius: 50%;
     margin: 0 auto 0.5rem;
     overflow: hidden;
-    background: var(--color-primary-light);
+    background: var(--color-primary);
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .gender-male .node-avatar {
-    background: #c5d9f0;
+    background: #1877F2;
   }
 
   .gender-female .node-avatar {
-    background: #f0c5d9;
+    background: #F3425F;
   }
 
   .node-avatar img {
@@ -277,7 +281,7 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
 
   .node-name {
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     color: var(--color-text);
   }
 
@@ -298,11 +302,11 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
     background: #fff;
     border-left: 1px solid var(--color-border);
     overflow-y: auto;
-    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.05);
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.08);
   }
 
   .sidebar-content {
-    padding: 1.5rem;
+    padding: 1.25rem;
   }
 
   .sidebar-close {
@@ -313,9 +317,16 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
     color: var(--color-text-light);
     padding: 0.25rem;
     line-height: 1;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .sidebar-close:hover {
+    background: var(--color-bg);
     color: var(--color-text);
   }
 
@@ -325,7 +336,7 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
     border-radius: 50%;
     margin: 0.5rem auto 1rem;
     overflow: hidden;
-    background: var(--color-primary-light);
+    background: var(--color-primary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -345,7 +356,7 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
 
   .sidebar-content h3 {
     text-align: center;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     margin-bottom: 0.25rem;
   }
 
@@ -353,33 +364,34 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
     text-align: center;
     color: var(--color-text-light);
     font-style: italic;
-    font-size: 0.85rem;
+    font-size: 0.8125rem;
   }
 
   .sidebar-dates {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    font-size: 0.85rem;
+    font-size: 0.8125rem;
     color: var(--color-text-light);
     margin: 0.5rem 0;
   }
 
   .sidebar-place {
     text-align: center;
-    font-size: 0.85rem;
+    font-size: 0.8125rem;
     color: var(--color-text-light);
     margin-bottom: 0.75rem;
   }
 
   .sidebar-bio {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     color: var(--color-text);
     line-height: 1.5;
     margin-bottom: 1rem;
     padding: 0.75rem;
     background: var(--color-bg);
     border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
   }
 
   .sidebar-relations {
@@ -391,7 +403,7 @@ import { FamilyTreeViewer } from '../components/FamilyTreeViewer';
     justify-content: space-between;
     padding: 0.4rem 0;
     border-bottom: 1px solid var(--color-border);
-    font-size: 0.85rem;
+    font-size: 0.8125rem;
   }
 
   .relation-label {
